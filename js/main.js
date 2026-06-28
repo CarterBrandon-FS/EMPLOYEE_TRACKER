@@ -128,7 +128,7 @@ class Main {
       // push to array
       this.employees.push(newEmp);
 
-      alert(`${name} added!`);
+      alert(`${employee.name} added!`);
 
       this.displayEmployees();
     }
@@ -150,9 +150,48 @@ class Main {
         );
       }
 
-      console.log(`✅ Employee removed!`);
+      console.log(`Employee removed!`);
       // run the init table display upon starting
       this.displayEmployees();
     }
+  }
+  // this will allow to edit the payrate only for the chosen employee
+  editEmployee() {
+    let input = prompt("Enter Employee ID to edit pay rate:");
+
+    let id = parseInt(input);
+
+    let employee = this.employees.find((emp) => emp.id === id);
+
+    if (employee) {
+      let newPay = parseInt(prompt(`Enter new pay rate for ${employee.name}:`));
+
+      employee.payRate = newPay;
+      employee.calcPay();
+
+      alert(`${employee.name} updated!`);
+
+      this.displayEmployees();
+    } else {
+      alert("Employee not found!");
+    }
+  }
+
+  // this clears the console layout and prints current records
+  displayEmployees() {
+    console.clear();
+    // name of company lol
+    console.log("Carter's Fork Around and Pig Out");
+
+    // system header
+    console.log("ID\tName\tAge\tSalary\tHrs\tPay\tType");
+
+    // loop employee array using forEach()
+    this.employee.forEach((emp) => {
+      // regualer temp string parsing
+      console.log(
+        `${emp.id}\t${emp.name}\t${emp.age}\t${emp.annualSalary}\t${emp.hours}\t${emp.payRate}\t${emp.employeeType}`,
+      );
+    });
   }
 }
